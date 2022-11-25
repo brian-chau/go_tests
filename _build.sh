@@ -1,4 +1,5 @@
 #!/bin/bash
 
-go build sources/main.go
+cd sources
+go build main.go stack.go
 
