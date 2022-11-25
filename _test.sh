@@ -1,8 +1,10 @@
 #!/bin/bash
 
-cd sources
 # List the files that existed before the test
-files_that_existed=$(ls)
+files_to_save=$(find * -type f)
+
+# Change into directory to run tests
+cd sources
 
 # Run the tests
 go test -v -cover -coverprofile=coverage > ../TestResults/test_results.txt
@@ -30,3 +32,7 @@ elif [[ $int_code_coverage -ge 75 ]] ; then
 else
     cp ../TestResults/Badges/Code_Coverage/red/"${int_code_coverage}_Percent.svg"    ../TestResults/CodeCoverageBadge.svg
 fi
+
+# Remove unnecessary files
+cd ..
+ls -1 | grep -v -x -f $files_to_save | xargs -d "\n" -P 0 rm -f
