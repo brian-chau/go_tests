@@ -55,7 +55,9 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">/home/brian/repos/go_test/sources/main.go (84.2%)</option>
+				<option value="file0">/home/brian/repos/go_test/sources/main.go (85.0%)</option>
+				
+				<option value="file1">/home/brian/repos/go_test/sources/stack.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -76,21 +78,22 @@ import "fmt"
 func sumSubarrayMins(arr []int) int <span class="cov8" title="1">{
         MOD := int(1000000007)
 
-        var stack []int
+        stack := NewStack()
         prevSmaller := int(0)
 
         dp := make([]int, len(arr))
-        for i := int(0); i &lt; len(arr); i++ </span><span class="cov8" title="1">{
-                for len(stack) &gt; 0 &amp;&amp; arr[stack[len(stack)-1]] &gt;= arr[i] </span><span class="cov8" title="1">{
-                        stack = stack[:len(stack)-1]
+        for i := range arr </span><span class="cov8" title="1">{
+                top, _ := stack.Peek()
+                for !stack.IsEmpty() &amp;&amp; arr[top] &gt;= arr[i] </span><span class="cov8" title="1">{
+                        stack.Pop()
                 }</span>
-                <span class="cov8" title="1">if len(stack) &gt; 0 </span><span class="cov8" title="1">{
-                        prevSmaller = stack[len(stack)-1]
+                <span class="cov8" title="1">if !stack.IsEmpty() </span><span class="cov8" title="1">{
+                        prevSmaller, _ = stack.Peek()
                         dp[i] = dp[prevSmaller] + (i-prevSmaller)*arr[i]
                 }</span> else<span class="cov8" title="1"> {
                         dp[i] = (i + 1) * arr[i]
                 }</span>
-                <span class="cov8" title="1">stack = append(stack, i)</span>
+                <span class="cov8" title="1">stack.Push(i)</span>
         }
 
         <span class="cov8" title="1">sum := int(0)
@@ -104,6 +107,59 @@ func main() <span class="cov0" title="0">{
         arr := []int{3, 1, 2, 4}
         result := sumSubarrayMins(arr)
         fmt.Println(result)
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package main
+
+type StackError struct {
+        msg string // description of error
+}
+
+func (e *StackError) Error() string <span class="cov8" title="1">{ return e.msg }</span>
+
+type stack struct {
+        s []int
+}
+
+func NewStack() *stack <span class="cov8" title="1">{
+        return &amp;stack{make([]int, 0)}
+}</span>
+
+func (s *stack) Push(v int) <span class="cov8" title="1">{
+        s.s = append(s.s, v)
+}</span>
+
+func (s *stack) Pop() (int, error) <span class="cov8" title="1">{
+        l := len(s.s)
+        if l == 0 </span><span class="cov8" title="1">{
+                return 0, &amp;StackError{"empty stack"}
+        }</span>
+
+        <span class="cov8" title="1">res := s.s[l-1]
+        s.s = s.s[:l-1]
+        return res, nil</span>
+}
+
+func (s *stack) Top() (int, error) <span class="cov8" title="1">{
+        return s.Peek()
+}</span>
+
+func (s *stack) Peek() (int, error) <span class="cov8" title="1">{
+        l := len(s.s)
+        if l == 0 </span><span class="cov8" title="1">{
+                return 0, &amp;StackError{"empty stack"}
+        }</span>
+
+        <span class="cov8" title="1">return s.s[l-1], nil</span>
+}
+
+func (s *stack) IsEmpty() bool <span class="cov8" title="1">{
+        return len(s.s) == 0
+}</span>
+
+func (s *stack) Size() int <span class="cov8" title="1">{
+        return len(s.s)
 }</span>
 </pre>
 		

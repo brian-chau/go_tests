@@ -1,5 +1,27 @@
-=== RUN   Test_FindBallDropColumn
---- PASS: Test_FindBallDropColumn (0.00s)
+=== RUN   Test_sumSubarrayMins
+--- PASS: Test_sumSubarrayMins (0.00s)
+=== RUN   Test_Push
+--- PASS: Test_Push (0.00s)
+=== RUN   Test_PeekEmpty1
+--- PASS: Test_PeekEmpty1 (0.00s)
+=== RUN   Test_PeekEmpty2
+--- PASS: Test_PeekEmpty2 (0.00s)
+=== RUN   Test_PeekValid
+--- PASS: Test_PeekValid (0.00s)
+=== RUN   Test_PopEmpty1
+--- PASS: Test_PopEmpty1 (0.00s)
+=== RUN   Test_PopEmpty2
+--- PASS: Test_PopEmpty2 (0.00s)
+=== RUN   Test_PopValid
+--- PASS: Test_PopValid (0.00s)
+=== RUN   Test_Size
+--- PASS: Test_Size (0.00s)
+=== RUN   Test_TopEmpty1
+--- PASS: Test_TopEmpty1 (0.00s)
+=== RUN   Test_TopEmpty2
+--- PASS: Test_TopEmpty2 (0.00s)
+=== RUN   Test_TopValid
+--- PASS: Test_TopValid (0.00s)
 PASS
-coverage: 84.2% of statements
-ok  	_/home/brian/repos/go_test/sources	0.001s
+coverage: 91.7% of statements
+ok  	_/home/brian/repos/go_test/sources	0.002s

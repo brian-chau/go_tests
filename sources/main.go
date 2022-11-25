@@ -5,21 +5,22 @@ import "fmt"
 func sumSubarrayMins(arr []int) int {
 	MOD := int(1000000007)
 
-	var stack []int
+	stack := NewStack()
 	prevSmaller := int(0)
 
 	dp := make([]int, len(arr))
-	for i := int(0); i < len(arr); i++ {
-		for len(stack) > 0 && arr[stack[len(stack)-1]] >= arr[i] {
-			stack = stack[:len(stack)-1]
+	for i := range arr {
+		top, _ := stack.Peek()
+		for !stack.IsEmpty() && arr[top] >= arr[i] {
+			stack.Pop()
 		}
-		if len(stack) > 0 {
-			prevSmaller = stack[len(stack)-1]
+		if !stack.IsEmpty() {
+			prevSmaller, _ = stack.Peek()
 			dp[i] = dp[prevSmaller] + (i-prevSmaller)*arr[i]
 		} else {
 			dp[i] = (i + 1) * arr[i]
 		}
-		stack = append(stack, i)
+		stack.Push(i)
 	}
 
 	sum := int(0)
