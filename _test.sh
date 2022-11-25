@@ -15,12 +15,14 @@ tests_failed=$(grep -E -i "FAIL:" ../TestResults/test_results.txt)
 string_code_coverage=$(grep -oP "(?<=coverage: )\S+(?=\% of statements)" ../TestResults/test_results.txt)
 int_code_coverage=$(printf '%.0f\n' $string_code_coverage)
 
+# Test results badge
 if $test_failed; then
     cp ../TestResults/Badges/Test_Results/Passed/green.svg ../TestResults/PassFailBadge.svg
 else
     cp ../TestResults/Badges/Test_Results/Failed/red.svg ../TestResults/PassFailBadge.svg
 fi
 
+# Code Coverage badge
 if [[ $int_code_coverage -ge 90 ]] ; then
     cp ../TestResults/Badges/Code_Coverage/green/"${int_code_coverage}_Percent.svg"  ../TestResults/CodeCoverageBadge.svg
 elif [[ $int_code_coverage -ge 75 ]] ; then
