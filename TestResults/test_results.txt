@@ -1,0 +1,5 @@
+=== RUN   Test_FindBallDropColumn
+--- PASS: Test_FindBallDropColumn (0.00s)
+PASS
+coverage: 84.2% of statements
+ok  	_/home/brian/repos/go_test/sources	0.001s
