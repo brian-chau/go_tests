@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List the files that existed before the test
-files_to_save=$(find * -type f)
+find . -type f > files_to_keep.txt
 
 # Change into directory to run tests
 cd sources
@@ -35,4 +35,6 @@ fi
 
 # Remove unnecessary files
 cd ..
-ls -1 | grep -v -x -f $files_to_save | xargs -d "\n" -P 0 rm -f
+find . -type f | grep -v -x -f files_to_keep.txt | xargs -d "\n" -P 0 rm -f
+
+rm files_to_keep.txt
